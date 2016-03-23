@@ -1,6 +1,6 @@
 {
   "scriptName": "Fuck Off As A Service - foaas.org",
   "version": "2016.04.22",
-  "usage": "fuckoff $params - visit foaas.org for more info."
+  "usage": "fuckoff $params - visit foaas.org for more info.",
   "command": "fuckoff"
 }
