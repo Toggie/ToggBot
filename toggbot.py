@@ -5,7 +5,6 @@ import asyncio
 import subprocess
 import json
 import os.path
-import shlex
 
 cfgData=json.loads(open("../learnpython/ToggBot_Working/config.json").read()) # Load config
 
