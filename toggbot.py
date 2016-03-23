@@ -13,7 +13,7 @@ client=discord.Client()
 def runScript(args):
     botCmd=args[1:]
     cmd=botCmd.split(' ',1)[0]
-    if (os.path.isfile("./scripts/%s/run.py" % cmd) == True):
+    if (os.path.isfile("./scripts/%s/run.py" % cmd)==True):
         if (len(botCmd.split())==1):
             params=" "
         else:
