@@ -4,19 +4,23 @@ import discord
 import asyncio
 import subprocess
 import json
+import os.path
 
-cfgData=json.loads(open("config.json").read()) # Load config
+cfgData=json.loads(open("../learnpython/ToggBot_Working/config.json").read()) # Load config
 
 client=discord.Client()
 
 def runScript(args):
     botCmd=args[1:]
     cmd=botCmd.split(' ',1)[0]
-    if (len(botCmd.split())==1):
-        params=" "
+    if (os.path.isfile("./scripts/%s/run.py" % cmd) == True):
+            if (len(botCmd.split())==1):
+                params=" "
+            else:
+                params = botCmd.split(' ',1)[1]
+            return(subprocess.check_output("./scripts/%s/run.py %s" % (cmd, params),shell=True).decode('utf-8'))
     else:
-        params = botCmd.split(' ',1)[1]
-    return(subprocess.check_output("./scripts/%s/run.py %s" % (cmd, params),shell=True).decode('utf-8'))
+        return("No such command.")
 
 @client.event
 async def on_ready():
