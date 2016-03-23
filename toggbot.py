@@ -6,7 +6,6 @@ import subprocess
 import json
 import os.path
 import shlex
-import re
 
 cfgData=json.loads(open("../learnpython/ToggBot_Working/config.json").read()) # Load config
 
