@@ -5,6 +5,7 @@ import asyncio
 import subprocess
 import json
 import os.path
+import shlex
 
 cfgData=json.loads(open("../learnpython/ToggBot_Working/config.json").read()) # Load config
 
@@ -17,8 +18,8 @@ def runScript(args):
         if (len(botCmd.split())==1):
             params=" "
         else:
-            params = botCmd.split(' ',1)[1]
-        return(subprocess.check_output("./scripts/%s/run.py %s" % (cmd, params),shell=True).decode('utf-8'))
+            params=' '.join('"{}"'.format(word) for word in botCmd.split(' ',1)[1].split(' '))
+        return(subprocess.check_output("./scripts/%s/run.py %s" % (cmd,params),shell=True).decode('utf-8'))
     else:
         return("No such command.")
 
