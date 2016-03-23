@@ -14,11 +14,11 @@ def runScript(args):
     botCmd=args[1:]
     cmd=botCmd.split(' ',1)[0]
     if (os.path.isfile("./scripts/%s/run.py" % cmd) == True):
-            if (len(botCmd.split())==1):
-                params=" "
-            else:
-                params = botCmd.split(' ',1)[1]
-            return(subprocess.check_output("./scripts/%s/run.py %s" % (cmd, params),shell=True).decode('utf-8'))
+        if (len(botCmd.split())==1):
+            params=" "
+        else:
+            params = botCmd.split(' ',1)[1]
+        return(subprocess.check_output("./scripts/%s/run.py %s" % (cmd, params),shell=True).decode('utf-8'))
     else:
         return("No such command.")
 
