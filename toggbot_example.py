@@ -4,7 +4,7 @@ import httplib2 as http
 import discord
 import asyncio
 
-def fuckOff(args):
+def fuckOff(args): # foaas functionality
     def mkPath(args): # creates REST path from arguments
         s=""
         for i in range (1,len(args)):
