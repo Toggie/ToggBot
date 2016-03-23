@@ -6,6 +6,7 @@ import subprocess
 import json
 import os.path
 import shlex
+import re
 
 cfgData=json.loads(open("../learnpython/ToggBot_Working/config.json").read()) # Load config
 
@@ -14,12 +15,12 @@ client=discord.Client()
 def runScript(args):
     botCmd=args[1:]
     cmd=botCmd.split(' ',1)[0]
-    if (os.path.isfile("./scripts/%s/run.py" % cmd)==True):
+    if (os.path.isfile("./scripts/%s/runScript" % cmd)==True):
         if (len(botCmd.split())==1):
             params=" " # So that params is not null
         else: # The below quotes the arguments passed for shell sanitation
             params=' '.join('"{}"'.format(word) for word in botCmd.split(' ',1)[1].split(' '))
-        return(subprocess.check_output("./scripts/%s/run.py %s" % (cmd,params),shell=True).decode('utf-8'))
+        return(subprocess.check_output("./scripts/%s/runScript %s" % (cmd,params),shell=True).decode('utf-8'))
     else:
         return("No such command.")
 
