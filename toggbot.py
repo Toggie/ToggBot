@@ -10,8 +10,6 @@ cfgData=json.loads(open("config.json").read()) # Load config
 client = discord.Client()
 
 def runScript(args):
-    def del_char(string, indexes):
-        return ''.join((char for idx, char in enumerate(string) if idx not in indexes))
     botCmd = args[1:]
     cmd = botCmd.split(' ', 1)[0]
     if (len(botCmd.split())==1):
