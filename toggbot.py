@@ -32,8 +32,14 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.content.startswith('!'):
-        await client.send_message(message.channel,runScript(message.content))
+        scriptReturn=runScript(message.content)
+        action=scriptReturn.split(None, 1)[0]
+        response=" ".join(scriptReturn.split()[1:])
+        if (action=="writeChannel^_^"):
+            await client.send_message(message.channel,response)
+        else:
+            print("Unrecognized command: %s %s" % (action, response))
+            print(args.split(None, 1)[0])
     else:
         return(0)
-
 client.run(cfgData["discord_email"],cfgData["discord_password"])
