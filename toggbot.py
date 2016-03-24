@@ -39,7 +39,6 @@ async def on_message(message):
             await client.send_message(message.channel,response)
         else:
             print("Unrecognized command: %s %s" % (action, response))
-            print(args.split(None, 1)[0])
     else:
         return(0)
 client.run(cfgData["discord_email"],cfgData["discord_password"])
