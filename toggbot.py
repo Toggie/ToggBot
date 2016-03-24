@@ -20,7 +20,7 @@ def runScript(args):
             params=' '.join('"{}"'.format(word) for word in botCmd.split(' ',1)[1].split(' '))
         return(subprocess.check_output("./scripts/%s/runScript %s" % (cmd,params),shell=True).decode('utf-8'))
     else:
-        return("$writeChannel$ No such command.")
+        return("$writeChannel$ No such command: \"%s\"" % cmd)
 
 @client.event
 async def on_ready():
