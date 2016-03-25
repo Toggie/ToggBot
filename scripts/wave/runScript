@@ -17,5 +17,5 @@ waveList = "- . , _ , . - ‘ ‾ ’".split(' ')
 print("$tmpWriteChannel$ Starting wave...")
 for i in (waveList * 2):
     wave=(mkWave(waveList)*3)
-    print("$editChannel$", '%s{%s}%s\r' % (wave,sys.argv[1],wave))
+    print("$editChannel$", "%s %s %s" % (wave,sys.argv[1],wave))
     waveList=shiftWave(waveList)

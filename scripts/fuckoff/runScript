@@ -32,4 +32,4 @@ def fuckOff(args): # foaas functionality
                     body,
                     headers)
             return(content.decode('utf-8'))
-print("$writeChannel$",fuckOff(argv))
+print("$writeChannel$",fuckOff(argv.split(' ', 1)))
