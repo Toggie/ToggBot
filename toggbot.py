@@ -51,8 +51,8 @@ async def on_message(message):
                 sleep(0.5) # for timing of silly things like animations
             else:
                 print("Unrecognized command: %s %s" % (action, response))
-            if len(scriptReturn)>1:
-                scriptReturn=shiftList(scriptReturn) # shift elements if multi-line.
+            if len(scriptReturn)>1: # shift list of commands if multi-line.
+                scriptReturn=shiftList(scriptReturn)
     else:
         return(0)
 client.run(cfgData["discord_email"],cfgData["discord_password"])
