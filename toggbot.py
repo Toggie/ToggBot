@@ -39,8 +39,6 @@ async def on_ready():
 async def on_message(message):
     if message.content.startswith('!'):
         scriptReturn=runScript(message.content)
-        print(scriptReturn)
-        print(len(scriptReturn))
         for i in scriptReturn:
             action=scriptReturn[0].split(None, 1)[0]
             response=" ".join(scriptReturn[0].split()[1:])
