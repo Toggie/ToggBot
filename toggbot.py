@@ -51,15 +51,8 @@ async def on_message(message):
                 sleep(0.5) # for timing of silly things like animations
             else:
                 print("Unrecognized command: %s %s" % (action, response))
-            scriptReturn=shiftList(scriptReturn)
-        # action=scriptReturn.split(None, 1)[0]
-        # response=" ".join(scriptReturn.split()[1:])
-        # if (action=="$writeChannel$"):
-        #    await client.send_message(message.channel,response)
-        #if (action=="$editChannel$"):
-        #    await client.edit_message(message.channel,response)
-        #else:
-        #    print("Unrecognized command: %s" % (scriptReturn))
+            if len(scriptReturn)>1:
+                scriptReturn=shiftList(scriptReturn) # shift elements if multi-line.
     else:
         return(0)
 client.run(cfgData["discord_email"],cfgData["discord_password"])
