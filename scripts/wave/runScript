@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import sys
+import os.path
+import numpy
+
+def mkWave(data):
+    wave=''.join('{}'.format(word) for word in data)
+    return(wave)
+
+def shiftWave(data):
+    wave=numpy.roll(data,-1)
+    return(wave)
+
+waveList = "- . , _ , . - ‘ ‾ ’".split(' ')
+
+print("$tmpWriteChannel$ Starting wave...")
+for i in (waveList * 2):
+    wave=(mkWave(waveList)*3)
+    print("$editChannel$", '%s{%s}%s\r' % (wave,sys.argv[1],wave))
+    waveList=shiftWave(waveList)

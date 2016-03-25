@@ -5,6 +5,8 @@ import asyncio
 import subprocess
 import json
 import os.path
+import numpy
+from time import sleep
 
 cfgData=json.loads(open("../learnpython/ToggBot_Working/config.json").read()) # Load config
 
@@ -18,9 +20,13 @@ def runScript(args):
             params=" " # So that params is not null
         else: # The below quotes the arguments passed for shell sanitation
             params=' '.join('"{}"'.format(word) for word in botCmd.split(' ',1)[1].split(' '))
-        return(subprocess.check_output("./scripts/%s/runScript %s" % (cmd,params),shell=True).decode('utf-8'))
+        return(subprocess.check_output("./scripts/%s/runScript %s" % (cmd,params),shell=True).decode('utf-8').splitlines())
     else:
-        return("$writeChannel$ No such command: \"%s\"" % cmd)
+        return("$writeChannel$ No such command: \"%s\"" % cmd).splitlines()
+
+def shiftList(data):
+    list=numpy.roll(data,-1)
+    return(list)
 
 @client.event
 async def on_ready():
@@ -33,12 +39,29 @@ async def on_ready():
 async def on_message(message):
     if message.content.startswith('!'):
         scriptReturn=runScript(message.content)
-        action=scriptReturn.split(None, 1)[0]
-        response=" ".join(scriptReturn.split()[1:])
-        if (action=="$writeChannel$"):
-            await client.send_message(message.channel,response)
-        else:
-            print("Unrecognized command: %s %s" % (action, response))
+        print(scriptReturn)
+        print(len(scriptReturn))
+        for i in scriptReturn:
+            action=scriptReturn[0].split(None, 1)[0]
+            response=" ".join(scriptReturn[0].split()[1:])
+            if (action=="$writeChannel$"):
+                await client.send_message(message.channel,response)
+            elif (action=="$tmpWriteChannel$"): # for writing messages to be edited later
+                tmp=await client.send_message(message.channel,response)
+            elif (action=="$editChannel$"):
+                await client.edit_message(tmp,response)
+                sleep(0.5) # for timing of silly things like animations
+            else:
+                print("Unrecognized command: %s %s" % (action, response))
+            scriptReturn=shiftList(scriptReturn)
+        # action=scriptReturn.split(None, 1)[0]
+        # response=" ".join(scriptReturn.split()[1:])
+        # if (action=="$writeChannel$"):
+        #    await client.send_message(message.channel,response)
+        #if (action=="$editChannel$"):
+        #    await client.edit_message(message.channel,response)
+        #else:
+        #    print("Unrecognized command: %s" % (scriptReturn))
     else:
         return(0)
 client.run(cfgData["discord_email"],cfgData["discord_password"])
