@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# written by Toggi3 - <jeffj8086@gmail.com>
 
 import discord
 import asyncio
